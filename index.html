@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>India's Top 10 Highest Grossing Movies — Demo</title>
+  <style>
+    /* ----- BASIC RESET & TYPOGRAPHY ----- */
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#ffb703; --muted:#94a3b8; --glass: rgba(255,255,255,0.03);
+      --radius:12px; --gap:1rem; --glass-2: rgba(255,255,255,0.02);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#071029 0%, #081427 100%); color:#e6eef8; line-height:1.45}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ----- LAYOUT ----- */
+    header{position:fixed; top:0; left:0; right:0; height:64px; backdrop-filter: blur(6px); display:flex; align-items:center; justify-content:space-between; padding:0 1rem; background:linear-gradient(90deg, rgba(11,18,32,0.6), rgba(8,14,24,0.4)); box-shadow:0 6px 18px rgba(2,6,23,0.6); z-index:1000}
+    .logo{display:flex; gap:.5rem; align-items:center}
+    .logo .dot{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#ff7b54); display:flex;align-items:center;justify-content:center;color:#071027;font-weight:700}
+    nav ul{display:flex; gap:0.6rem; list-style:none; margin:0; padding:0}
+    nav li{padding:8px 10px; border-radius:8px}
+    nav li:hover{background:var(--glass)}
+
+    main{max-width:1100px;margin:92px auto 48px;padding:1rem}
+    .grid{display:grid;grid-template-columns: 1fr 320px; gap:1.25rem}
+
+    /* ----- CARD ----- */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:1rem;border-radius:var(--radius);box-shadow: 0 8px 30px rgba(2,6,23,0.6)}
+    h1,h2,h3,h4,h5,h6{margin:0 0 .5rem}
+
+    /* ----- HERO ----- */
+    .hero{display:flex;gap:1rem;align-items:center}
+    .hero figure{margin:0;flex:0 0 180px}
+    .hero img{width:180px;height:120px;object-fit:cover;border-radius:8px;display:block}
+    .meta{flex:1}
+    .subtitle{color:var(--muted); font-size:.95rem}
+
+    /* ----- LISTS ----- */
+    ol.toplist{padding-left:1.1rem}
+    ol.toplist li{margin:.35rem 0;padding:.4rem;border-radius:8px}
+
+    /* ----- DESCRIPTION LIST ----- */
+    dl{display:grid;grid-template-columns:120px 1fr; gap:.25rem .75rem}
+    dt{font-weight:700;color:var(--accent)}
+    dd{margin:0}
+
+    /* ----- TABLE ----- */
+    table{width:100%;border-collapse:collapse;margin-top:.5rem}
+    th,td{padding:.6rem .75rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.04)}
+    th{font-size:.9rem;color:var(--muted);font-weight:600}
+    tr:hover td{background:linear-gradient(90deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008))}
+
+    /* ----- FORMS ----- */
+    .search{display:flex; gap:.5rem}
+    input[type='search'], input[type='email'], select, textarea{background:var(--glass); border:1px solid rgba(255,255,255,0.03); padding:.6rem .75rem; border-radius:8px; color:inherit}
+    button{background:var(--accent); color:#071027; padding:.6rem .8rem; border:none;border-radius:8px; font-weight:700; cursor:pointer}
+
+    /* ----- POSITION EXAMPLES ----- */
+    .position-demo{height:220px; position:relative; background:var(--glass-2); border-radius:10px; padding:1rem}
+    .pos-rel{position:relative; top:0; left:0; padding:.5rem}
+    .pos-abs{position:absolute; right:10px; bottom:10px; background:rgba(255,255,255,0.03); padding:.5rem 0.7rem; border-radius:6px}
+    .pos-sticky{position:sticky; top:78px}
+
+    /* ----- ANIMATIONS & TRANSITIONS ----- */
+    .movie-poster{width:80px;height:48px;object-fit:cover;border-radius:6px;transition: transform .3s ease, box-shadow .3s ease}
+    .movie-poster:hover{transform:scale(1.06); box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+    .pulse{animation: pulse 2s infinite}
+    @keyframes pulse{0%{transform:scale(1); box-shadow:0 0 0 0 rgba(255,183,3,0.2)}50%{transform:scale(1.02); box-shadow:0 14px 40px rgba(255,183,3,0.08)}100%{transform:scale(1); box-shadow:0 0 0 0 rgba(255,183,3,0.0)}}
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width:900px){.grid{grid-template-columns:1fr} header{height:72px} .hero figure{display:none}}
+
+    /* small utility classes */
+    .muted{color:var(--muted)}
+    .right{text-align:right}
+    .center{text-align:center}
+    .small{font-size:.85rem}
+    .badge{background:rgba(255,255,255,0.03); padding:.25rem .45rem;border-radius:999px;font-weight:700}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="dot">IN</div>
+      <div>
+        <div style="font-weight:700">India BoxOffice</div>
+        <div class="small muted">Top 10 — demo page</div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#top">Top 10</a></li>
+        <li><a href="#table">Table</a></li>
+        <li><a href="#forms">Subscribe</a></li>
+        <li><a href="#position">Position</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="card">
+        <div class="hero">
+          <figure>
+            <img src="https://via.placeholder.com/360x240?text=Bollywood+Poster" alt="movie poster example">
+            <figcaption class="small muted">Poster (img & figcaption demo)</figcaption>
+          </figure>
+          <div class="meta">
+            <h1>India's Top 10 Highest Grossing Movies</h1>
+            <p class="subtitle">A demo HTML/CSS page showcasing almost all basic HTML elements — headings, lists, tables, forms, positions, animations and more. Content topic: <strong>India's Top 10 Highest Grossing Movies</strong>.</p>
+
+            <p class="muted small">Note: numeric box-office figures vary by source. This page is for demonstration and layout purposes; check trade sources for exact numbers.</p>
+          </div>
+        </div>
+
+        <hr style="margin:1rem 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
+
+        <h2 id="top">Top 10 (ordered list)</h2>
+        <ol class="toplist">
+          <li><strong>Dangal</strong> <span class="small muted">(2016)</span> — family sports drama.</li>
+          <li><strong>Baahubali 2: The Conclusion</strong> <span class="small muted">(2017)</span> — epic historical action.</li>
+          <li><strong>Pushpa 2: The Rule</strong> <span class="small muted">(2024)</span> — Telugu action.</li>
+          <li><strong>RRR</strong> <span class="small muted">(2022)</span> — period action drama.</li>
+          <li><strong>KGF: Chapter 2</strong> <span class="small muted">(2022)</span> — Kannada action.</li>
+          <li><strong>Jawan</strong> <span class="small muted">(2023)</span> — action thriller.</li>
+          <li><strong>Pathaan</strong> <span class="small muted">(2023)</span> — spy action.</li>
+          <li><strong>Kalki 2898 AD</strong> <span class="small muted">(2024)</span> — sci-fi spectacle.</li>
+          <li><strong>Animal</strong> <span class="small muted">(2023)</span> — action-emotional</li>
+          <li><strong>Bajrangi Bhaijan</strong> <span class="small muted">(2015)</span> — period action drama.</li>
+        </ol>
+
+        <h3>Quick facts (definition list)</h3>
+        <dl>
+          <dt>Genre</dt><dd>Action, Drama, Historical, Sci-fi</dd>
+          <dt>Languages</dt><dd>Hindi, Telugu, Tamil, Kannada & others</dd>
+          <dt>Sources</dt><dd>Trade sites, Box office trackers, Wikipedia</dd>
+        </dl>
+
+        <h4>Small unordered examples</h4>
+        <ul>
+          <li>Poster tags: <code>&lt;figure&gt; &lt;figcaption&gt;</code></li>
+          <li>Inline tags: <code>&lt;span&gt;, &lt;strong&gt;, &lt;em&gt;</code></li>
+          <li>Block tags: <code>&lt;div&gt;, &lt;section&gt;, &lt;article&gt;</code></li>
+        </ul>
+
+        <h5>Inline text styles</h5>
+        <p>This paragraph shows <strong>bold</strong>, <em>italic</em>, <u>underlined</u>, <small class="muted">small muted</small>, <span style="color:#ffb703">accent colored</span>, <span style="text-transform:uppercase">uppercase</span>, and <span style="letter-spacing:1px">letter spacing</span>.</p>
+
+        <h6>Accessibility note</h6>
+        <p class="small muted">Images must have <code>alt</code> text. Tables should include <code>&lt;caption&gt;</code> and <code>scope</code> on headers when appropriate.</p>
+
+      </section>
+
+      <aside class="card pos-sticky">
+        <div class="position-demo">
+          <div class="pos-rel">Relative box (normal flow)</div>
+          <div class="pos-abs">Absolute box (bottom-right)</div>
+        </div>
+
+        <h3 class="small" style="margin-top:1rem">Search & Subscribe (form)</h3>
+        <form id="forms">
+          <div class="search">
+            <input type="search" placeholder="Search a movie" aria-label="Search movies">
+            <button type="submit">Search</button>
+          </div>
+          <div style="margin-top:.6rem">
+            <label class="small muted">Subscribe for updates</label>
+            <div style="display:flex; gap:.5rem; margin-top:.4rem">
+              <input type="email" placeholder="you@domain.com" aria-label="email">
+              <button type="button">Subscribe</button>
+            </div>
+          </div>
+        </form>
+
+        <hr style="margin:1rem 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
+
+        <h4 class="small">Quick links</h4>
+        <ul style="list-style: none; padding:0; margin:0">
+          <li><a href="#table">Open table</a></li>
+          <li><a href="#top">Top list</a></li>
+          <li><a href="#position">Position demo</a></li>
+        </ul>
+
+      </aside>
+    </div>
+
+    <section class="card" style="margin-top:1rem">
+      <h2 id="table">Comparison table</h2>
+      <p class="small muted">Numbers are illustrative; check official sources for exact worldwide grosses.</p>
+      <table>
+        <caption class="small muted">Top 10 — example table</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Movie</th>
+            <th scope="col">Year</th>
+            <th scope="col" class="right">Worldwide gross (approx)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><img src="https://via.placeholder.com/80x48?text=Dangal" alt="Dangal poster" class="movie-poster"> Dangal</td>
+            <td>2016</td>
+            <td class="right">—</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><img src="https://via.placeholder.com/80x48?text=Baahubali+2" alt="Baahubali 2 poster" class="movie-poster"> Baahubali 2: The Conclusion</td>
+            <td>2017</td>
+            <td class="right">—</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><img src="https://via.placeholder.com/80x48?text=Pushpa+2" alt="Pushpa 2 poster" class="movie-poster"> Pushpa 2: The Rule</td>
+            <td>2024</td>
+            <td class="right">—</td>
+          </tr>
+          <!-- more rows omitted for brevity (use same pattern) -->
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:1rem">Interactive demo: filter & highlight (JS)</h3>
+      <p class="small muted">This demonstrates simple DOM scripting (also shows using anchors and event handlers).</p>
+
+      <div style="display:flex; gap:.6rem; margin-top:.6rem; flex-wrap:wrap">
+        <button id="highlight-odd">Highlight odd rows</button>
+        <button id="sort-alpha">Sort by title</button>
+      </div>
+
+    </section>
+
+    <section class="card" style="margin-top:1rem">
+      <h2 id="position">Positioning & animations</h2>
+      <p>Below we show examples of <code>fixed</code>, <code>sticky</code>, and CSS animation keyframes.</p>
+
+      <div style="margin-top:.6rem">
+        <div style="position:fixed; right:18px; bottom:18px; background:var(--accent); color:#071027; padding:.6rem 0.8rem; border-radius:10px; font-weight:700">Fixed badge</div>
+
+        <div style="margin-top:1.8rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap">
+          <div class="card" style="flex:1; min-width:220px">
+            <h4 class="small">Animated poster</h4>
+            <img src="https://via.placeholder.com/240x140?text=Animated" alt="animated demo" style="border-radius:10px; display:block" class="pulse">
+            <p class="small muted">Uses keyframes <code>pulse</code>.</p>
+          </div>
+
+          <div class="card" style="min-width:220px; width:320px">
+            <h4 class="small">Transition demo</h4>
+            <div style="padding:.6rem; border-radius:8px; background:var(--glass); transition: transform .28s ease-in-out;" id="hover-box">Hover me</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="card" style="margin-top:1rem">
+      <h4>Notes & anchors</h4>
+      <p class="small muted">This demo contains examples of headings (h1..h6), lists (ol, ul, dl), tables, forms, nav, images, anchors, positions (relative, absolute, sticky, fixed), animations, transitions, and common text properties (color, transform, spacing).</p>
+      <p class="small">Source placeholders: images use <code>via.placeholder.com</code>. Replace with real posters & trade figures before publishing.</p>
+    </footer>
+
+  </main>
+
+  <script>
+    // Simple JS to demonstrate DOM manipulation and event listeners
+    document.getElementById('highlight-odd')?.addEventListener('click', ()=>{
+      document.querySelectorAll('table tbody tr').forEach((tr,i)=>{
+        tr.style.background = (i%2===0) ? 'rgba(255,183,3,0.03)' : '';
+      });
+    });
+
+    document.getElementById('sort-alpha')?.addEventListener('click', ()=>{
+      const tbody = document.querySelector('table tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a,b)=> a.cells[1].textContent.trim().localeCompare(b.cells[1].textContent.trim()));
+      rows.forEach(r=>tbody.appendChild(r));
+    });
+
+    // small hover transform
+    const hoverBox = document.getElementById('hover-box');
+    hoverBox?.addEventListener('mouseenter', ()=> hoverBox.style.transform = 'translateY(-6px)');
+    hoverBox?.addEventListener('mouseleave', ()=> hoverBox.style.transform = 'translateY(0)');
+
+  </script>
+</body>
+</html>
